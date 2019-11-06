@@ -6,13 +6,19 @@ penguinPromise.then
     {
         console.log("nice code broski");
         console.log("data", data);
-        console.log(getQuizGrade(data, 0));
+        //console.log(getQuizGrade(data, 0));
+        getQuizGrade(data, 0)
     },
     function(err)
     {
         console.log("this code is not good", err);
     }
 )
+
+var dayCounter = 0;
+var idCounter = 0;
+var penguinCounter = 0;
+var yData = d3.range(100);
 
 
 var getQuiz = function(penguin)
@@ -34,13 +40,22 @@ var getQuizGrade = function(penguins, index)//index is day
     .text(function(penguin){
         return penguin.quizes[index].grade
     })
-    .attr("r", 20)
+    .attr("r", 5)
+    .attr("id", function(d)
+        {
+        
+        return penguinCounter 
+        })
     .attr("cy", function(penguin)
         {
-            for (i = 0; i < 230; i + 10){
-                return i + 20;
-            }
+            return penguin.quizes[index].grade * 7
         })
+    .attr("cx", function(penguin)
+         {
+            penguinCounter = penguinCounter + 1;
+            return penguinCounter * 10
+        })
+    
     
     //puts out the numbers
     d3.select("body")
@@ -61,8 +76,15 @@ var getQuizGrade = function(penguins, index)//index is day
     .enter()
     .append("button")
     .attr("type","text")
-    .text("day")
-    .attr("id", function(penguin){return penguin.quizes.day})
+    .text(function(d){
+        dayCounter = dayCounter + 1;
+        return "day " + dayCounter })
+    .attr("id", function(d)
+        {
+        idCounter = idCounter + 1;
+        return "day" + idCounter 
+        }
+         )
     
     
     //so far, this is just for information purposes
@@ -75,9 +97,9 @@ var getQuizGrade = function(penguins, index)//index is day
 
 //var yscale = d3.scaleLiner()
 
-var xData = d3.range(10);
 
-var points = xData.map(function(x)
+
+var points = yData.map(function(x)
                       {
     return {
         x:x,
