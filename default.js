@@ -59,14 +59,13 @@ var getQuizGrade = function(penguins, index)//index is day
     
     //puts out the numbers
     d3.select("body")
-    .selectAll("p")
+    .selectAll("span")
     .data(penguins)
     .enter()
-    .append("p")
+    .append("span")
     .text(function(penguin){
         return penguin.quizes[index].grade
     })
-    .attr("r", 2)
     
     
     //make buttons for each day WORK IN PROGRESS
