@@ -7,7 +7,18 @@ penguinPromise.then
         console.log("nice code broski");
         console.log("data", data);
         //console.log(getQuizGrade(data, 0));
-        getQuizGrade(data, 0)
+        getQuizGrade(data, masterDayCount-1)
+        console.log("masterDayCount",masterDayCount-1)
+        
+        
+        makeButtons(data);
+        /*
+        d3.select("#day1") //an attempt to redraw everything when the day1 button gets clicked
+        .on("click", function(d)
+           {
+            getQuizGrade(data, masterDayCount)
+        })
+        */
     },
     function(err)
     {
@@ -15,6 +26,7 @@ penguinPromise.then
     }
 )
 
+var masterDayCount = 1;
 var dayCounter = 0;
 var idCounter = 0;
 var penguinCounter = 0;
@@ -53,7 +65,7 @@ var getQuizGrade = function(penguins, index)//index is day
     .attr("cx", function(penguin)
          {
             penguinCounter = penguinCounter + 1;
-            return penguinCounter * 10
+            return penguinCounter * 12
         })
     
     
@@ -68,26 +80,50 @@ var getQuizGrade = function(penguins, index)//index is day
     })
     
     
-    //make buttons for each day WORK IN PROGRESS
+    
+    
+    
+    //so far, this is just for information purposes
+    return penguins[0].quizes[0].grade;
+}
+
+
+
+
+var makeButtons = function(penguins)
+{
     d3.select("body")
     .selectAll("input")
-    .data(penguins)
+    .data(penguins[0].quizes)
     .enter()
     .append("button")
     .attr("type","text")
-    .text(function(d){
+    .text(function(penguin)
+        {
         dayCounter = dayCounter + 1;
-        return "day " + dayCounter })
+        console.log("penguin", penguin);
+        return penguin.day
+        })
     .attr("id", function(d)
         {
         idCounter = idCounter + 1;
         return "day" + idCounter 
         }
          )
+    .on("click", function(penguin)
+        {
+            console.log("button clicked!");
+            console.log("penguins", penguins)
+            console.log("penguin", penguin)
+            var masterDayCount = masterDayCount + 1;
+        
+        
+            d3.select("svg")
+            .remove()
+
+            getQuizGrade(penguins, 3)
+        })
     
-    
-    //so far, this is just for information purposes
-    return penguins[0].quizes[0].grade;
 }
 
 
