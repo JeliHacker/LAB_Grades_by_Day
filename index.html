@@ -5,10 +5,13 @@
         <script src="https://d3js.org/d3.v5.min.js"></script>
         
         <style>
-        
+            body{
+                background-color: azure;
+                text-align: center;
+            }
             button{
                 padding:15px;
-                margin-right:10px;
+                margin:10px;
                 font-family: Helvetica;
                 font-size: 12px
                 /*font-family: "Arial"*/
@@ -16,18 +19,28 @@
             button:hover{
                 background-color: #ff6961;
             }
+            h1{
+                
+            }
+            svg{
+                border: 20px solid black;
+            }
+            
         </style>
     </head>
     
     <body>
        
-        <h1>skooo baby</h1>
+        <h1>Grades By Day</h1>
+        
+        <h4>A journey into the visual senses by Joshua West and Elisha Gooch</h4>
         
         
-        <button>Previous Day</button><button>Next Day</button>
+        <button class="prev">Previous Day</button>
+        <button class="next">Next Day</button>
         <br><br><br>
         <svg></svg>
-        
+        <br>
          <script src="default.js"></script>
     </body>
 </html>
